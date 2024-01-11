@@ -1,5 +1,5 @@
 import { Button, ChakraProvider } from "@chakra-ui/react";
-import { theme } from "././theme/theme";
+import { theme } from "././theme/Theme";
 
 function App() {
   return (

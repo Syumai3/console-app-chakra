@@ -10,11 +10,14 @@ import { UserCard } from "../organisms/user/userCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { UserDetailModal } from "../organisms/user/UserDetailModale";
 import { useSelectUser } from "../../hooks/useSelectUser";
+import { useLoginUser } from "../../hooks/useLoginUser";
 
 export const UserManagement = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, users, loading } = useAllUsers();
   const { onSelectUser, selectedUser } = useSelectUser();
+  const { loginUser } = useLoginUser();
+  console.log(loginUser);
 
   useEffect(() => getUsers(), []);
 
@@ -50,6 +53,3 @@ export const UserManagement = memo(() => {
     </>
   );
 });
-function useSelectedUser() {
-  throw new Error("Function not implemented.");
-}

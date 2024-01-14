@@ -9,14 +9,21 @@ import { memo, useCallback, useEffect } from "react";
 import { UserCard } from "../organisms/user/userCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { UserDetailModal } from "../organisms/user/UserDetailModale";
+import { useSelectUser } from "../../hooks/useSelectUser";
 
 export const UserManagement = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, users, loading } = useAllUsers();
+  const { onSelectUser, selectedUser } = useSelectUser();
 
   useEffect(() => getUsers(), []);
 
-  const onClickUser = useCallback(() => onOpen(), []);
+  const onClickUser = useCallback(
+    (id: number) => {
+      onSelectUser({ id, users, onOpen });
+    },
+    [users, onSelectUser, onOpen]
+  );
 
   return (
     <>
@@ -29,6 +36,7 @@ export const UserManagement = memo(() => {
           {users.map((user) => (
             <WrapItem key={user.id} mx="auto">
               <UserCard
+                id={user.id}
                 imageUrl="https:source.unsplash.com/randam"
                 userName={user.username}
                 fullName={user.name}
@@ -38,7 +46,10 @@ export const UserManagement = memo(() => {
           ))}
         </Wrap>
       )}
-      <UserDetailModal isOpen={isOpen} onClose={onClose} />
+      <UserDetailModal user={selectedUser} isOpen={isOpen} onClose={onClose} />
     </>
   );
 });
+function useSelectedUser() {
+  throw new Error("Function not implemented.");
+}

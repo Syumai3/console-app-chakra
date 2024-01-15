@@ -6,17 +6,18 @@ import { useAuth } from "../../hooks/useAuth";
 export const Login = memo(() => {
   const { login, loading } = useAuth();
 
-  const [userId, setUserID] = useState<string>("");
+  const [userId, setUserId] = useState<string>("");
+  console.log(userId);
 
   const onChangeUserId = (e: ChangeEvent<HTMLInputElement>) =>
-    setUserID(e.target.value);
+    setUserId(e.target.value);
 
   const onClickLogin = () => login(userId);
 
   return (
     <Flex align="center" justify="center" height="100vh">
       <Box bg="white" w="sm" p={4} borderRadius="md" shadow="md">
-        <Heading as="h1" size="lg" textAlign="center">
+        <Heading as="h1" size="lg" textAlign="center" color="gray">
           ユーザー管理アプリ
         </Heading>
         <Divider my={4} />
